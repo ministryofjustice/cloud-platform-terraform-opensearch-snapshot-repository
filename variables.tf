@@ -13,20 +13,14 @@ variable "tags" {
   default     = {}
 }
 
-variable "opensearch_domain_name" {
-  description = "Name of the main OpenSearch"
+variable "opensearch_primary_domain" {
+  description = "The primary OpenSearch domain to create the snapshot"
   type        = string
 }
 
 variable "opensearch_domain_names" {
   type        = list(string)
-  description = "List of OpenSearch domain names allowed to assume this role"
-}
-
-
-variable "iam_role_name" {
-  description = "Name of the IAM role to be assumed by OpenSearch"
-  type        = string
+  description = "A list of OpenSearch domain names (including the primary and any target domains) that will be allowed to assume the IAM role to access and restore the snapshot from the S3 repository"
 }
 
 variable "opensearch_url" {

@@ -15,7 +15,7 @@ module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "4.3.0"
 
-  bucket = "${var.opensearch_domain_name}-snapshot-s3-repository"
+  bucket = "${var.opensearch_primary_domain}-snapshot-s3-repository"
   acl    = "private"
 
   block_public_acls       = true
@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "s3_snapshot_access" {
 }
 
 resource "aws_iam_policy" "s3_snapshot_access" {
-  name        = "${var.opensearch_domain_name}-snapshot-s3-access"
+  name        = "${var.opensearch_primary_domain}-snapshot-s3-access"
   description = "Grants OpenSearch permissions to access S3 for snapshot"
   policy      = data.aws_iam_policy_document.s3_snapshot_access.json
 }
@@ -102,7 +102,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role" "opensearch_snapshot_role" {
-  name               = "${var.opensearch_domain_name}-snapshot-s3-role"
+  name               = "${var.opensearch_primary_domain}-snapshot-s3-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
   managed_policy_arns = [
@@ -112,7 +112,7 @@ resource "aws_iam_role" "opensearch_snapshot_role" {
 
 # Attach the s3 repository to the snapshot
 resource "opensearch_snapshot_repository" "this" {
-  name = "${var.opensearch_domain_name}-snapshot-repository"
+  name = "${var.opensearch_primary_domain}-snapshot-repository"
   type = "s3"
 
   settings = {
