@@ -1,11 +1,19 @@
 # cloud-platform-terraform-template
 
-[![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-template.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-template/releases)
+[![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-template.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot-repository/releases)
 
-This Terraform module will create an S3 snapshot repository, IAM role, and IAM policy for use with Amazon OpenSearch on the Cloud Platform.
+This Terraform module will create:
+- An S3 bucket to store OpenSearch snapshots
+- An IAM role with a trust relationship for OpenSearch
+- An IAM policy granting required S3 permissions
+
+These resources are configured to support snapshot creation and restoration across one or more Amazon OpenSearch domains on the Cloud Platform.
+
+Key Inputs
+- `opensearch_primary_domain`: The name of the OpenSearch domain that will create the snapshot.
+- `opensearch_domain_names`: A list of OpenSearch domain names (including the primary and any target domains) that will be allowed to assume the IAM role to access and restore the snapshot from the S3 repository.
 
 ## Usage
-
 ```hcl
 module "opensearch_snapshot_repository" {
   source = "github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot?ref=latest" # Replace `latest` with the latest version tag
@@ -14,8 +22,8 @@ module "opensearch_snapshot_repository" {
     opensearch = <your-opensearch-domain-provider>
   }
 
-  opensearch_domain_name       = "your-opensearch-domain-name"
-  opensearch_domain_names      = ["your-opensearch-domain-names"] # List of 
+  opensearch_primary_domain       = "your-opensearch-domain-name"
+  opensearch_domain_names      = ["your-opensearch-domain-names"] # List of domain names allowed to assume the role
 }
 ```
 
