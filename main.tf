@@ -1,12 +1,3 @@
-provider "opensearch" {
-  url                 = var.opensearch_url
-  aws_assume_role_arn = var.opensearch_assume_role_arn
-  aws_profile         = var.aws_profile
-  sign_aws_requests   = true
-  sniff               = false
-  healthcheck         = false
-}
-
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 

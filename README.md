@@ -1,4 +1,4 @@
-# cloud-platform-terraform-template
+# cloud-platform-terraform-opensearch-snapshot-repository
 
 [![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-opensearch-snapshot-repository.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot-repository/releases)
 
