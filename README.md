@@ -67,12 +67,8 @@ See the [examples/](examples/) folder for more information.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aws_profile"></a> [aws\_profile](#input\_aws\_profile) | aws profile | `string` | n/a | yes |
-| <a name="input_opensearch_assume_role_arn"></a> [opensearch\_assume\_role\_arn](#input\_opensearch\_assume\_role\_arn) | IAM role ARN OpenSearch should assume | `string` | n/a | yes |
 | <a name="input_opensearch_domain_names"></a> [opensearch\_domain\_names](#input\_opensearch\_domain\_names) | A list of OpenSearch domain names (including the primary and any target domains) that will be allowed to assume the IAM role to access and restore the snapshot from the S3 repository | `list(string)` | n/a | yes |
 | <a name="input_opensearch_primary_domain"></a> [opensearch\_primary\_domain](#input\_opensearch\_primary\_domain) | The primary OpenSearch domain to create the snapshot | `string` | n/a | yes |
-| <a name="input_opensearch_url"></a> [opensearch\_url](#input\_opensearch\_url) | OpenSearch endpoint URL (https://...) | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |
 
 ## Outputs
 
