@@ -25,8 +25,6 @@ module "s3_bucket" {
       }
     }
   }
-
-  tags = var.tags
 }
 
 # Create IAM role for OpenSearch
