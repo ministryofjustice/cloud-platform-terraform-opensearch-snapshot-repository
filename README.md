@@ -1,11 +1,19 @@
 # cloud-platform-terraform-template
 
-[![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-template.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-template/releases)
+[![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-template.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot-repository/releases)
 
-This Terraform module will create an S3 snapshot repository, IAM role, and IAM policy for use with Amazon OpenSearch on the Cloud Platform.
+This Terraform module will create:
+- An S3 bucket to store OpenSearch snapshots
+- An IAM role with a trust relationship for OpenSearch
+- An IAM policy granting required S3 permissions
+
+These resources are configured to support snapshot creation and restoration across one or more Amazon OpenSearch domains on the Cloud Platform.
+
+Key Inputs
+- `opensearch_primary_domain`: The name of the OpenSearch domain that will create the snapshot.
+- `opensearch_domain_names`: A list of OpenSearch domain names (including the primary and any target domains) that will be allowed to assume the IAM role to access and restore the snapshot from the S3 repository.
 
 ## Usage
-
 ```hcl
 module "opensearch_snapshot_repository" {
   source = "github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot?ref=latest" # Replace `latest` with the latest version tag
@@ -14,8 +22,8 @@ module "opensearch_snapshot_repository" {
     opensearch = <your-opensearch-domain-provider>
   }
 
-  opensearch_domain_name       = "your-opensearch-domain-name"
-  opensearch_domain_names      = ["your-opensearch-domain-names"] # List of 
+  opensearch_primary_domain       = "your-opensearch-domain-name"
+  opensearch_domain_names      = ["your-opensearch-domain-names"] # List of domain names allowed to assume the role
 }
 ```
 
@@ -28,7 +36,6 @@ See the [examples/](examples/) folder for more information.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.0.0 |
 | <a name="requirement_opensearch"></a> [opensearch](#requirement\_opensearch) | 2.3.1 |
 
 ## Providers
@@ -61,10 +68,9 @@ See the [examples/](examples/) folder for more information.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_profile"></a> [aws\_profile](#input\_aws\_profile) | aws profile | `string` | n/a | yes |
-| <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of the IAM role to be assumed by OpenSearch | `string` | n/a | yes |
 | <a name="input_opensearch_assume_role_arn"></a> [opensearch\_assume\_role\_arn](#input\_opensearch\_assume\_role\_arn) | IAM role ARN OpenSearch should assume | `string` | n/a | yes |
-| <a name="input_opensearch_domain_name"></a> [opensearch\_domain\_name](#input\_opensearch\_domain\_name) | Name of the main OpenSearch | `string` | n/a | yes |
-| <a name="input_opensearch_domain_names"></a> [opensearch\_domain\_names](#input\_opensearch\_domain\_names) | List of OpenSearch domain names allowed to assume this role | `list(string)` | n/a | yes |
+| <a name="input_opensearch_domain_names"></a> [opensearch\_domain\_names](#input\_opensearch\_domain\_names) | A list of OpenSearch domain names (including the primary and any target domains) that will be allowed to assume the IAM role to access and restore the snapshot from the S3 repository | `list(string)` | n/a | yes |
+| <a name="input_opensearch_primary_domain"></a> [opensearch\_primary\_domain](#input\_opensearch\_primary\_domain) | The primary OpenSearch domain to create the snapshot | `string` | n/a | yes |
 | <a name="input_opensearch_url"></a> [opensearch\_url](#input\_opensearch\_url) | OpenSearch endpoint URL (https://...) | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |
 
