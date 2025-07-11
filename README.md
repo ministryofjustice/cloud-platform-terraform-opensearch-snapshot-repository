@@ -1,6 +1,6 @@
 # cloud-platform-terraform-template
 
-[![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-template.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot-repository/releases)
+[![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-opensearch-snapshot-repository.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot-repository/releases)
 
 This Terraform module will create:
 - An S3 bucket to store OpenSearch snapshots
