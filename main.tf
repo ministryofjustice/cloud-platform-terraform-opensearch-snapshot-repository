@@ -105,7 +105,7 @@ resource "opensearch_snapshot_repository" "this" {
   type = "s3"
 
   settings = {
-    bucket   = module.s3_bucket.bucket
+    bucket   = module.s3_bucket.s3_bucket_arn
     region   = data.aws_region.current.name
     role_arn = aws_iam_role.opensearch_snapshot_role.arn
   }
