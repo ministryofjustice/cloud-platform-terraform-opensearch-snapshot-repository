@@ -2,25 +2,20 @@
 
 [![Releases](https://img.shields.io/github/v/release/ministryofjustice/cloud-platform-terraform-template.svg)](https://github.com/ministryofjustice/cloud-platform-terraform-template/releases)
 
-This Terraform module will _create a ..._ for use on the Cloud Platform.
+This Terraform module will create an S3 snapshot repository, IAM role, and IAM policy for use with Amazon OpenSearch on the Cloud Platform.
 
 ## Usage
 
 ```hcl
-module "template" {
-  source = "github.com/ministryofjustice/cloud-platform-terraform-template?ref=version" # use the latest release
+module "opensearch_snapshot_repository" {
+  source = "github.com/ministryofjustice/cloud-platform-terraform-opensearch-snapshot?ref=latest" # Replace `latest` with the latest version tag
 
-  # Configuration
-  # ...
+  providers = {
+    opensearch = <your-opensearch-domain-provider>
+  }
 
-  # Tags
-  business_unit          = var.business_unit
-  application            = var.application
-  is_production          = var.is_production
-  team_name              = var.team_name
-  namespace              = var.namespace
-  environment_name       = var.environment
-  infrastructure_support = var.infrastructure_support
+  opensearch_domain_name       = "your-opensearch-domain-name"
+  opensearch_domain_names      = ["your-opensearch-domain-names"] # List of 
 }
 ```
 

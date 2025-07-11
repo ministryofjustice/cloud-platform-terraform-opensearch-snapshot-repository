@@ -7,37 +7,39 @@
 ########
 # Tags #
 ########
-variable "business_unit" {
-  description = "Area of the MOJ responsible for the service"
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "opensearch_domain_name" {
+  description = "Name of the main OpenSearch"
   type        = string
 }
 
-variable "application" {
-  description = "Application name"
+variable "opensearch_domain_names" {
+  type        = list(string)
+  description = "List of OpenSearch domain names allowed to assume this role"
+}
+
+
+variable "iam_role_name" {
+  description = "Name of the IAM role to be assumed by OpenSearch"
   type        = string
 }
 
-variable "is_production" {
-  description = "Whether this is used for production or not"
+variable "opensearch_url" {
+  description = "OpenSearch endpoint URL (https://...)"
   type        = string
 }
 
-variable "team_name" {
-  description = "Team name"
+variable "opensearch_assume_role_arn" {
+  description = "IAM role ARN OpenSearch should assume"
   type        = string
 }
 
-variable "namespace" {
-  description = "Namespace name"
-  type        = string
-}
-
-variable "environment_name" {
-  description = "Environment name"
-  type        = string
-}
-
-variable "infrastructure_support" {
-  description = "The team responsible for managing the infrastructure. Should be of the form <team-name> (<team-email>)"
+variable "aws_profile" {
+  description = "aws profile"
   type        = string
 }
