@@ -99,14 +99,34 @@ resource "aws_iam_role" "opensearch_snapshot_role" {
   ]
 }
 
+# Mapping IAM role to manage_snapshots so it can register snapshot repositories
+resource "opensearch_roles_mapping" "manage_snapshots_mapping" {
+  role_name   = "manage_snapshots"
+  description = "Mapping IAM role to manage_snapshots so it can register snapshot repositories"
+
+  backend_roles = [
+    aws_iam_role.opensearch_snapshot_role.arn
+  ]
+
+  users = []
+
+  depends_on = [
+    aws_iam_role.opensearch_snapshot_role
+  ]
+}
+
 # Attach the s3 repository to the snapshot
 resource "opensearch_snapshot_repository" "this" {
   name = "${var.opensearch_primary_domain}-snapshot-repository"
   type = "s3"
 
   settings = {
-    bucket   = module.s3_bucket.s3_bucket_arn
+    bucket   = module.s3_bucket.s3_bucket_id
     region   = data.aws_region.current.name
     role_arn = aws_iam_role.opensearch_snapshot_role.arn
   }
+
+  depends_on = [
+    opensearch_roles_mapping.manage_snapshots_mapping
+  ]
 }
