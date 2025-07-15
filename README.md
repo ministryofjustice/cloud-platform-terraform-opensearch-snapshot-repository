@@ -57,6 +57,7 @@ See the [examples/](examples/) folder for more information.
 |------|------|
 | [aws_iam_policy.s3_snapshot_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.opensearch_snapshot_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [opensearch_roles_mapping.manage_snapshots_mapping](https://registry.terraform.io/providers/opensearch-project/opensearch/2.3.1/docs/resources/roles_mapping) | resource |
 | [opensearch_snapshot_repository.this](https://registry.terraform.io/providers/opensearch-project/opensearch/2.3.1/docs/resources/snapshot_repository) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |

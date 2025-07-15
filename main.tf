@@ -7,7 +7,6 @@ module "s3_bucket" {
   version = "4.3.0"
 
   bucket = "${var.opensearch_primary_domain}-snapshot-s3-repository"
-  acl    = "private"
 
   block_public_acls       = true
   block_public_policy     = true
