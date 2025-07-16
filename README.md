@@ -57,6 +57,7 @@ See the [examples/](examples/) folder for more information.
 |------|------|
 | [aws_iam_policy.s3_snapshot_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.opensearch_snapshot_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [opensearch_roles_mapping.manage_snapshots_mapping](https://registry.terraform.io/providers/opensearch-project/opensearch/2.3.1/docs/resources/roles_mapping) | resource |
 | [opensearch_snapshot_repository.this](https://registry.terraform.io/providers/opensearch-project/opensearch/2.3.1/docs/resources/snapshot_repository) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -67,6 +68,7 @@ See the [examples/](examples/) folder for more information.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_snapshot_backend_roles"></a> [additional\_snapshot\_backend\_roles](#input\_additional\_snapshot\_backend\_roles) | Extra backend roles to map to the manage\_snapshots role | `list(string)` | `[]` | no |
 | <a name="input_opensearch_domain_names"></a> [opensearch\_domain\_names](#input\_opensearch\_domain\_names) | A list of OpenSearch domain names (including the primary and any target domains) that will be allowed to assume the IAM role to access and restore the snapshot from the S3 repository | `list(string)` | n/a | yes |
 | <a name="input_opensearch_primary_domain"></a> [opensearch\_primary\_domain](#input\_opensearch\_primary\_domain) | The primary OpenSearch domain to create the snapshot | `string` | n/a | yes |
 
