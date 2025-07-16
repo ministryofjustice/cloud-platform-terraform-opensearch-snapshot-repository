@@ -101,11 +101,12 @@ resource "aws_iam_role" "opensearch_snapshot_role" {
 # Mapping IAM role to manage_snapshots so it can register snapshot repositories
 resource "opensearch_roles_mapping" "manage_snapshots_mapping" {
   role_name   = "manage_snapshots"
-  description = "Mapping IAM role to manage_snapshots so it can register snapshot repositories"
+  description = "Mapping IAM roles to manage_snapshots so it can register snapshot repositories"
 
-  backend_roles = [
-    aws_iam_role.opensearch_snapshot_role.arn
-  ]
+  backend_roles = concat(
+    [aws_iam_role.opensearch_snapshot_role.arn],
+    var.additional_snapshot_backend_roles
+  )
 
   users = []
 
