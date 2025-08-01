@@ -4,7 +4,7 @@ data "aws_region" "current" {}
 # Create OpenSearch Snapshot S3 repository
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "4.3.0"
+  version = "5.2.0"
 
   bucket = "${var.opensearch_primary_domain}-snapshot-s3-repository"
 
